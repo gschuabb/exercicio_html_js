@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de Campos Numéricos</title>
+    <style>
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="formulario-valida-campos">
+        <label for="campo-a">Campo A:</label>
+        <input type="number" id="campo-a" required>
+        <br><br>
+        <label for="campo-b">Campo B:</label>
+        <input type="number" id="campo-b" required>
+        <br><br>
+        <button type="submit">Submeter</button>
+    </form>
+
+    <!-- Mensagem de sucesso ou erro será exibida aqui -->
+    <div id="mensagem" class="message"></div>
+
+    <script>
+        // Seleciona o formulário e o elemento da mensagem
+        const formulario = document.getElementById('formulario-valida-campos');
+        const mensagem = document.getElementById('mensagem');
+
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault();  // Evita o envio do formulário para processar a validação
+
+            // Pega os valores dos campos A e B
+            const campoA = document.getElementById('campo-a').value;
+            const campoB = document.getElementById('campo-b').value;
+
+            // Converte os valores para números
+            const numeroA = Number(campoA);
+            const numeroB = Number(campoB);
+
+            // Validação: verifica se o número B é maior que o número A
+            if (numeroB > numeroA) {
+                mensagem.textContent = "Formulário válido! O número B é maior que o número A.";
+                mensagem.className = 'message success';  // Aplica a classe de sucesso
+            } else {
+                mensagem.textContent = "Formulário inválido! O número B deve ser maior que o número A.";
+                mensagem.className = 'message error';  // Aplica a classe de erro
+            }
+        });
+    </script>
+</body>
+</html>
